@@ -1,0 +1,132 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.0.x"]
+}
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Star {
+  id                  Int      @id @default(autoincrement())
+  name                String
+  category            String
+  country             String
+  short_bio           String   @db.Text
+  full_bio            String   @db.Text
+  image_url           String   @db.Text
+  availability_status String   @default("Available")
+  created_at          DateTime @default(now())
+
+  requests            ContactRequest[]
+  analytics           AnalyticsEvent[]
+
+  @@map("star")
+}
+
+model ContactRequest {
+  id         Int      @id @default(autoincrement())
+  full_name  String
+  company    String?
+  email      String
+  phone      String?
+  country    String?
+  event_type String
+  event_date String?
+  message    String   @db.Text
+  created_at DateTime @default(now())
+  star_id    Int
+  star       Star?    @relation(fields: [star_id], references: [id])
+
+  @@index([star_id], map: "ContactRequest_star_id_fkey")
+  @@map("contactrequest")
+}
+
+model AnalyticsEvent {
+  id          Int      @id @default(autoincrement())
+  event_type  String
+  page        String?
+  country     String?
+  city        String?
+  region      String?
+  ip_address  String?
+  user_agent  String?
+  device_type String?
+  browser     String?
+  os          String?
+  session_id  String?
+  duration_ms Int?
+  timestamp   DateTime @default(now())
+  star_id     Int?
+  star        Star?    @relation(fields: [star_id], references: [id])
+
+  @@index([star_id], map: "AnalyticsEvent_star_id_fkey")
+  @@map("analyticsevent")
+}
+
+model ChatMessage {
+  id          Int      @id @default(autoincrement())
+  session_id  String
+  sender      String
+  message     String   @db.Text
+  ip_address  String?
+  device_type String?
+  user_agent  String?
+  country     String?
+  timestamp   DateTime @default(now())
+  chat_type   String   @default("AI")
+
+  session     ChatSession @relation(fields: [session_id], references: [id])
+
+  @@index([session_id], map: "chatmessage_session_id_fkey")
+  @@map("chatmessage")
+}
+
+model ChatSession {
+  id         String   @id
+  status     String   @default("active")
+  chat_type  String   @default("AI")
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  messages   ChatMessage[]
+  activities ChatSessionActivity[]
+
+  @@map("chatsession")
+}
+
+model ChatSessionActivity {
+  id         Int      @id @default(autoincrement())
+  session_id String
+  status     String
+  reason     String?
+  timestamp  DateTime @default(now())
+
+  session    ChatSession @relation(fields: [session_id], references: [id])
+
+  @@index([session_id], map: "chatsessionactivity_session_id_fkey")
+  @@map("chatsessionactivity")
+}
+
+model GlobalSettings {
+  id                                String   @id @default("current")
+  hero_show_cards                   Boolean  @default(true)
+  hero_show_image                   Boolean  @default(false)
+  hero_image_url                    String?  @db.Text
+  active_notification_sound_id      Int?
+  header_transparent                Boolean  @default(true)
+  updated_at                        DateTime @updatedAt
+
+  active_notification_sound         NotificationSound? @relation(fields: [active_notification_sound_id], references: [id])
+  @@map("globalsettings")
+}
+
+model NotificationSound {
+  id          Int      @id @default(autoincrement())
+  name        String
+  url         String   @db.Text
+  created_at  DateTime @default(now())
+
+  settings    GlobalSettings[]
+  @@map("notificationsound")
+}

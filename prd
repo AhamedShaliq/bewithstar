@@ -1,0 +1,423 @@
+📄 PRODUCT REQUIREMENTS DOCUMENT (PRD)
+Product Name (Working Title)
+
+StarConnect
+(A premium celebrity booking & contact landing platform)
+
+1️⃣ PRODUCT OVERVIEW
+Vision
+
+Create a cinematic, premium, light-themed landing web application that allows users globally to request meetings, collaborations, or event invitations with celebrities (actors, influencers, public figures).
+
+The platform will function as:
+
+A high-end brand presentation site
+
+A curated celebrity showcase
+
+A contact request portal
+
+A minimal analytics-driven admin dashboard
+
+This is NOT a marketplace.
+This is a premium gateway experience.
+
+2️⃣ TARGET AUDIENCE
+Primary Users
+
+Event organizers
+
+Brand managers
+
+Corporate agencies
+
+Media production houses
+
+High-net-worth individuals
+
+Secondary Users
+
+PR teams
+
+Talent agencies
+
+Marketing agencies
+
+3️⃣ CORE FEATURES (LANDING PAGE ONLY)
+🎬 3.1 Cinematic Hero Section
+Objective:
+
+Deliver a visually stunning first impression.
+
+Requirements:
+
+Full-width cinematic video background OR subtle animated gradient
+
+Smooth fade-in headline animation
+
+Headline example:
+
+“Connect With Global Icons”
+
+Subheadline:
+
+“Book. Meet. Collaborate.”
+
+CTA Buttons:
+
+“Explore Stars”
+
+“Request a Meeting”
+
+Animation:
+
+Smooth scroll reveal
+
+Elegant fade transitions
+
+Light-based premium aesthetics (white + gold + subtle shadow depth)
+
+🌟 3.2 Star Carousel Section
+Objective:
+
+Showcase celebrities dynamically from database.
+
+Requirements:
+
+Horizontal cinematic carousel
+
+Each card includes:
+
+Image (from database)
+
+Name
+
+Category (Actor / Influencer / Speaker)
+
+Country
+
+Short bio
+
+“Request Booking” button
+
+Design:
+
+Premium card style
+
+Soft shadows
+
+Light theme (white background)
+
+Gold/neutral accents
+
+Smooth carousel transitions
+
+Behavior:
+
+Images loaded dynamically from database
+
+Lazy loading enabled
+
+Modal view on click with:
+
+Larger image
+
+Full biography
+
+Tags
+
+Availability status
+
+Contact CTA
+
+📝 3.3 Booking / Contact Request Form
+Objective:
+
+Allow users to submit meeting requests.
+
+Fields:
+
+Full Name
+
+Company Name
+
+Email
+
+Phone Number
+
+Country
+
+Star Selected (dropdown)
+
+Event Type
+
+Proposed Date
+
+Message
+
+Features:
+
+Form validation
+
+Anti-spam protection
+
+Success animation after submission
+
+Email notification to admin
+
+Store submission in database
+
+🌍 3.4 Global Access Section
+
+Simple section explaining:
+
+Global representation
+
+Secure communication
+
+Verified talent network
+
+Discretion & professionalism
+
+With premium icon animations.
+
+🧑‍💼 3.5 Minimal Admin Portal
+Scope: Analytics + Tracking ONLY
+
+No management tools required.
+
+Admin Features:
+Dashboard:
+
+Total page views
+
+Unique visitors
+
+Total contact requests
+
+Requests per star
+
+Requests per country
+
+Daily/weekly/monthly charts
+
+Data Visualization:
+
+Line chart (visits over time)
+
+Bar chart (contact requests per star)
+
+Pie chart (country distribution)
+
+Security:
+
+Secure login
+
+JWT authentication
+
+Rate limiting
+
+Admin-only access
+
+4️⃣ TECHNICAL REQUIREMENTS
+Frontend
+
+React + Vite
+
+TypeScript
+
+TailwindCSS
+
+Framer Motion (smooth animations)
+
+Swiper.js (carousel)
+
+Recharts (admin analytics)
+
+Axios for API calls
+
+Backend
+
+Node.js + Express
+
+MySQL database
+
+Prisma ORM
+
+JWT authentication
+
+Nodemailer (admin notifications)
+
+Rate limiting middleware
+
+Database Structure
+Table: stars
+
+id
+
+name
+
+category
+
+country
+
+short_bio
+
+full_bio
+
+image_url (stored in DB)
+
+availability_status
+
+created_at
+
+Table: contact_requests
+
+id
+
+full_name
+
+company
+
+email
+
+phone
+
+country
+
+star_id
+
+event_type
+
+event_date
+
+message
+
+created_at
+
+Table: analytics_events
+
+id
+
+event_type (page_view, form_submit)
+
+page
+
+star_id (nullable)
+
+country
+
+device_type
+
+timestamp
+
+5️⃣ DESIGN SYSTEM
+Theme:
+
+Light-based premium
+
+Colors:
+
+Background: #ffffff
+
+Accent: Soft gold / champagne tone
+
+Secondary: Light beige / cream
+
+Text: Dark charcoal
+
+Buttons: Elegant gold gradient or soft black
+
+Visual Style:
+
+Cinematic spacing
+
+Elegant typography
+
+No clutter
+
+Large imagery
+
+Luxury branding
+
+6️⃣ PERFORMANCE REQUIREMENTS
+
+Images optimized
+
+Lazy loading
+
+Lighthouse score 90+
+
+API caching
+
+Fast initial load
+
+7️⃣ SECURITY REQUIREMENTS
+
+Input validation
+
+SQL injection prevention
+
+Rate limiting on forms
+
+CAPTCHA optional
+
+Admin auth protected routes
+
+Environment variables for secrets
+
+8️⃣ DEPLOYMENT
+
+Frontend:
+
+Vercel
+
+Backend:
+
+Railway / Render
+
+Database:
+
+Managed MySQL
+
+9️⃣ SUCCESS METRICS
+
+Bounce rate < 40%
+
+Conversion rate (form submissions)
+
+Avg time on page
+
+Returning visitors %
+
+🔟 FUTURE ROADMAP (Not Now)
+
+Talent-side dashboard
+
+Availability calendar
+
+Payment integration
+
+Video introduction clips
+
+Multi-language support
+
+Final Summary
+
+This product is:
+
+Cinematic
+
+Elegant
+
+Light luxury themed
+
+Dynamic star showcase
+
+Database-driven
+
+Analytics-enabled
+
+Minimal admin
+
+Premium brand feel
